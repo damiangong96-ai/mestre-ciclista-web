@@ -136,38 +136,65 @@ footer a:hover{color:var(--light)}
 .fade.in{opacity:1;transform:none}
 
 
-/* ---------------- reseñas (estilo Testimonials Kit, carrusel) ---------------- */
-#resenas{padding-bottom:clamp(70px,10vh,110px)}
-.rating{display:flex;align-items:center;gap:12px;margin-top:26px}
-.rating .g{width:34px;height:34px;flex-shrink:0}
-.rating small{display:block;font-weight:500;font-size:14px;line-height:1.2}
-.rating .score{display:flex;align-items:center;gap:8px;margin-top:2px}
-.rating b{font-family:var(--display);font-weight:400;font-size:30px;line-height:1}
-.rating .count{color:var(--ink-64);font-size:13px}
+/* ---------------- reseñas: tarjetas flotantes (estilo "Customer stories") ---------------- */
+#resenas{padding-bottom:clamp(70px,10vh,110px);text-align:center;overflow:hidden}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.07);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-64)}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--red)}
+#resenas .title{margin-top:18px}
+.rating{display:inline-flex;align-items:center;gap:10px;margin-top:14px;color:var(--ink-64);font-size:15px}
+.rating .g{width:20px;height:20px}
+.rating b{color:var(--ink);font-weight:600}
 .stars{display:inline-flex;gap:2px;color:var(--red)}
 .stars svg{width:15px;height:15px;fill:currentColor}
-.stars .half{position:relative}
-.rev-track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3*14px)/3.6);gap:14px;margin:22px calc(0px - var(--side)) 0;padding:0 var(--side) 6px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--side);scrollbar-width:none;overscroll-behavior-x:contain}
-.rev-track::-webkit-scrollbar{display:none}
-.rev{scroll-snap-align:start;background:#f7f7f5;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:22px 22px 20px;align-self:start}
-.rev header{display:grid;grid-template-columns:40px 1fr 20px;gap:12px;align-items:center}
-.rev .av{width:40px;height:40px;border-radius:50%;background:#e2e4e3;display:grid;place-items:center;font-weight:500;color:#333}
-.rev .who b{display:block;font-weight:500;font-size:15px;line-height:1.25}
-.rev .who span{font-size:13px;color:var(--ink-64)}
-.rev .g{width:20px;height:20px}
-.rev p{margin-top:16px;font-size:15.5px;line-height:1.5;color:#1d1d1d;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
-.rev.open p{-webkit-line-clamp:unset;display:block}
-.rev .more{margin-top:10px;background:none;border:0;padding:0;font:inherit;font-size:13px;font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer;color:var(--ink)}
-.rev-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}
-.rev-nav a{font-size:14px;color:var(--ink-64);background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:1px}
-.rev-nav a:hover{color:var(--ink)}
-.arrows{display:flex;gap:10px}
-.arrows button{width:42px;height:42px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;display:grid;place-items:center;cursor:pointer;transition:opacity .2s ease,transform .1s ease-out}
-.arrows button:active{transform:scale(.94)}
-.arrows button:disabled{opacity:.35;cursor:default}
-.arrows svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2}
-@media (max-width:1000px){.rev-track{grid-auto-columns:calc((100% - 14px)/2.2)}}
-@media (max-width:600px){.rev-track{grid-auto-columns:84%}}
+.board{position:relative;max-width:1120px;height:560px;margin:clamp(30px,5vh,50px) auto 0}
+.tcard{--r:0deg;position:absolute;width:23%;min-width:230px;text-align:left;rotate:var(--r);z-index:1;
+  transition:rotate .5s cubic-bezier(.22,1,.36,1),translate .5s cubic-bezier(.22,1,.36,1),scale .5s cubic-bezier(.22,1,.36,1),opacity .6s ease;cursor:default}
+.tcard .float{animation:bob var(--d,7s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+@keyframes bob{from{transform:translateY(-5px) rotate(-.6deg)}to{transform:translateY(6px) rotate(.7deg)}}
+.face{position:relative;overflow:hidden;border-radius:24px;padding:22px 22px 20px;min-height:250px;display:flex;flex-direction:column;gap:16px;
+  box-shadow:0 1px 2px rgba(0,0,0,.06),0 18px 40px -12px rgba(0,0,0,.25)}
+.face::after{content:"";position:absolute;top:-46px;right:-46px;width:118px;height:118px;border-radius:50%;background:rgba(255,255,255,.18);pointer-events:none}
+.face .row{display:flex;justify-content:space-between;align-items:center}
+.face .src{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:rgba(0,0,0,.08)}
+.face .src svg{width:12px;height:12px}
+.face q{font-family:var(--big);font-weight:500;font-size:17px;line-height:1.38;letter-spacing:-.01em;quotes:"“" "”"}
+.face .by{display:flex;align-items:center;gap:10px;margin-top:auto}
+.face .av{width:38px;height:38px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600;flex-shrink:0}
+.face .by b{display:block;font-size:14px;font-weight:600;line-height:1.2}
+.face .by span{font-size:12px;opacity:.65}
+.c-red .face{background:var(--red);color:#fff}.c-red .face .src{background:rgba(255,255,255,.18)}
+.c-light .face{background:#fff;color:var(--ink)}
+.c-lime .face{background:var(--accent);color:#111}
+.c-sand .face{background:#f5ece3;color:var(--ink)}
+.c-dark .face{background:#111;color:#f1f1f1}.c-dark .face .src{background:rgba(255,255,255,.12)}.c-dark .face .av{background:#f1f1f1;color:#111}
+/* posiciones: como una mesa con tarjetas dejadas encima */
+.p1{left:0;top:120px;--r:-7deg;--d:7.5s}
+.p2{left:24%;top:10px;--r:-3deg;--d:6.4s;--dl:-2s}
+.p3{left:38.5%;top:225px;--r:1deg;--d:8.2s;--dl:-4s;z-index:0}
+.p4{left:53%;top:20px;--r:5deg;--d:6.9s;--dl:-1s}
+.p5{left:77%;top:135px;--r:8deg;--d:7.8s;--dl:-3s}
+@media (hover:hover) and (pointer:fine){
+  .tcard:hover{--r:0deg;translate:0 -12px;scale:1.04;z-index:5}
+  .tcard:hover .float{animation-play-state:paused}
+}
+.tcard:active{scale:.98}
+/* entrada al llegar a la sección */
+.board:not(.in) .tcard{opacity:0;translate:0 80px;rotate:0deg}
+.board.in .tcard{transition-delay:calc(var(--i) * 90ms)}
+.board.in .tcard:hover{transition-delay:0s}
+.more-g{display:inline-block;margin-top:18px;font-size:14px;color:var(--ink-64);background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:1px}
+.more-g:hover{color:var(--ink)}
+@media (max-width:900px){
+  .board{height:auto;display:grid;gap:0;max-width:420px}
+  .tcard{position:relative;left:auto!important;top:auto!important;width:100%;min-width:0;margin-top:-6px}
+  .tcard:first-child{margin-top:0}
+  .p1{--r:-3deg}.p2{--r:2.5deg}.p3{--r:-2deg}.p4{--r:3deg}.p5{--r:-2.5deg}
+  .p3{z-index:1}
+}
+@media (prefers-reduced-motion:reduce){
+  .tcard .float{animation:none}
+  .board:not(.in) .tcard{opacity:1;translate:none;rotate:var(--r)}
+}
 
 @media (max-width:900px){
   .steps,.info{grid-template-columns:1fr 1fr}
@@ -257,94 +284,49 @@ footer a:hover{color:var(--light)}
 </section>
 
 <!-- ======================= RESEÑAS ======================= -->
-<!-- Reseñas reales de Google (copiadas del perfil del taller). Nota y número: actualizar a mano. -->
+<!-- Reseñas reales de Google (perfil del taller). Nota y número: actualizar a mano. -->
 <section id="resenas">
-  <h2 class="title words">Reseñas</h2>
-  <div class="rating fade">
-    <svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>
-    <div><small>Valoración en Google</small>
-      <div class="score"><b>4,7</b><span class="stars" aria-label="4,7 de 5 estrellas"><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><defs><linearGradient id="st70"><stop offset="70%" stop-color="currentColor"/><stop offset="70%" stop-color="#cfd2d0"/></linearGradient></defs><path fill="url(#st70)" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg></span><span class="count">120 reseñas</span></div>
-    </div>
+  <span class="pill"><i></i>Reseñas en Google</span>
+  <h2 class="title words">Lo que dicen de nosotros</h2>
+  <p class="rating"><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg><b>4,7</b><span class="stars" aria-label="4,7 de 5 estrellas"><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><defs><linearGradient id="st70"><stop offset="70%" stop-color="currentColor"/><stop offset="70%" stop-color="#cfd2d0"/></linearGradient></defs><path fill="url(#st70)" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.1 5.9L10 14.8 4.7 17.7l1.1-5.9L1.4 7.7l6-.7z"/></svg></span>120 reseñas</p>
+  <div class="board" id="board">
+    <article class="tcard c-red p1" style="--i:0">
+      <div class="float"><div class="face">
+        <div class="row"><span class="src"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google</span></div>
+        <q>Nuestro taller de confianza. Buena gente y mejores consejos 💕</q>
+        <div class="by"><span class="av" aria-hidden="true">LA</span><span><b>Libe Amunarriz</b><span>Reseña en Google · 2026</span></span></div>
+      </div></div>
+    </article>
+    <article class="tcard c-light p2" style="--i:1">
+      <div class="float"><div class="face">
+        <div class="row"><span class="src"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google</span></div>
+        <q>Sometimes I wish they weren&#x27;t so good at their job so I could see them more. Kind, efficient, honest. Cien por cien</q>
+        <div class="by"><span class="av" aria-hidden="true">JR</span><span><b>Jordan Roberts</b><span>Reseña en Google · 2026</span></span></div>
+      </div></div>
+    </article>
+    <article class="tcard c-sand p3" style="--i:2">
+      <div class="float"><div class="face">
+        <div class="row"><span class="src"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google</span></div>
+        <q>Me robaron el sillín y la tija. Pasé por allí y el tío dejó lo que estaba haciendo y me instaló uno nuevo en nada. Tienda muy guapa. Volveré.</q>
+        <div class="by"><span class="av" aria-hidden="true">DM</span><span><b>Diego Magnoni</b><span>Reseña en Google · 2024</span></span></div>
+      </div></div>
+    </article>
+    <article class="tcard c-lime p4" style="--i:3">
+      <div class="float"><div class="face">
+        <div class="row"><span class="src"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google</span></div>
+        <q>Excelente taller, Alejandro es un gran profesional y el trato no puede ser mejor. Se nota la pasión por el mundo de las bicicletas.</q>
+        <div class="by"><span class="av" aria-hidden="true">RB</span><span><b>Ricard Bea Bosch</b><span>Reseña en Google · 2023</span></span></div>
+      </div></div>
+    </article>
+    <article class="tcard c-dark p5" style="--i:4">
+      <div class="float"><div class="face">
+        <div class="row"><span class="src"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>Google</span></div>
+        <q>Very competent and friendly guys! I was bikepacking Spain and had bottom bracket issues but they changed my bb incredible fast and for a reasonable price.</q>
+        <div class="by"><span class="av" aria-hidden="true">B</span><span><b>Benni</b><span>Reseña en Google · 2026</span></span></div>
+      </div></div>
+    </article>
   </div>
-  <div class="rev-track" id="revs" tabindex="0" aria-label="Reseñas de clientes">
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">J</span><span class="who"><b>Jordan Roberts</b><span>Google · 2026</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Sometimes I wish they weren&#x27;t so good at their job so I could see them more. Kind, efficient, honest. Cien por cien</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">L</span><span class="who"><b>Libe Amunarriz</b><span>Google · 2026</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Nuestro taller de confianza. Buena gente y mejores consejos 💕</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">R</span><span class="who"><b>raul monroy</b><span>Google · 2022</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Solucionólogo súper profesional! Siempre encuentra la mejor respuesta para cualquier problema, y siempre intenta, además, que sean, además de buenas, económicas. Se nota que le encanta el mundo de la bici, y que tiene mucho conocimiento técnico… Ya me ha montado dos bicis, y no las llevo a ningún otro sitio…</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">B</span><span class="who"><b>Benni</b><span>Google · 2026</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Very competent and friendly guys! I was bikepacking Spain and had bottom bracket issues but they changed my bb incredible fast and for a reasonable price. Thanks for your help!</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">L</span><span class="who"><b>Laura Chaves</b><span>Google · 2022</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Lo que más me gusta de este lugar es el profesionalismo con el que cuidan y arreglan las bicis. Son detallistas y usan herramientas de alto nivel. Super recomendado para llevar bicis que necesitan cuidados especiales ✨✨🚲 además pueden encontrar al BACC en el mismo lugar, la asociación de ciclistas que promueven la bici en Cataluña!</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">M</span><span class="who"><b>Manuel Delgado</b><span>Google · 2026</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Soy cliente del barrio desde hace años. Es magnífico.</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">R</span><span class="who"><b>Ricard Bea Bosch</b><span>Google · 2023</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Excelente taller, Alejandro es un gran profesional y el trato no puede ser mejor. Se nota la pasión por el mundo de las bicicletas.</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">J</span><span class="who"><b>Joe Tonsager</b><span>Google · 2022</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Nothing but the best service. Professional, prompt and friendly, what more could you ask for! Traveling abroad from the USA and it was a blessing to have found this shop. Thanks for the help Alejandro!</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">A</span><span class="who"><b>alberto fernandez</b><span>Google · 2025</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Profesionalidad y servicio impecable! Super amables y siempre con el mejor consejo para los profesionales y no profesionales. Mi taller sin duda. Y lo que más me gusta, que cierran el lunes para viviiiirrrr. Aparte del finde claro.</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">D</span><span class="who"><b>Diego Magnoni</b><span>Google · 2024</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Me robaron el sillín y la tija. Pasé por allí y el tío dejó lo que estaba haciendo y me instaló uno nuevo en nada. Tienda muy guapa. Volveré.</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">L</span><span class="who"><b>Larry Baltz</b><span>Google · 2023</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Alejandro has been patient with my many questions (and my lack of Spanish or Catalan), generous with practical advice and expert with the service of my electric bike. I realized how much I depend on the shop the one day he was unavoidably unavailable.</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">O</span><span class="who"><b>Oscar Lafuente</b><span>Google · 2023</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Alejandro no es simplemente un mecánico, es un verdadero maestro de la bicicleta, recomendable 100%, trato cercano y familiar. Imprescindible para los que aman la bicicleta.</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">D</span><span class="who"><b>David Laferriere</b><span>Google · 2022</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Best shop I&#x27;ve ever been. Super helpful, with good tips, honest, clean place, professional and friendly. Really recommended. Thank you 👌</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-      <article class="rev">
-        <header><span class="av" aria-hidden="true">T</span><span class="who"><b>Timothe</b><span>Google · 2026</span></span><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 7l7.2 5.6c4.2-3.9 7.1-9.6 7.1-17.1z"/><path fill="#FBBC05" d="M10.5 28.5c-.5-1.4-.8-2.9-.8-4.5s.3-3.1.8-4.5l-7.9-6.2C1 16.5 0 20.1 0 24s1 7.5 2.6 10.7l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.2-5.6c-2 1.4-4.7 2.3-8.7 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg></header>
-        <p>Bike delivered in the morning and ready by noon, good and quick experience, I recommend it.</p>
-        <button class="more" type="button" hidden>Leer más</button>
-      </article>
-  </div>
-  <div class="rev-nav">
-    <a href="https://www.google.com/maps/search/?api=1&query=Mestre+Ciclista+C%2F+Maspons+12" target="_blank" rel="noopener">Ver todas en Google</a>
-    <div class="arrows">
-      <button type="button" data-dir="-1" aria-label="Reseñas anteriores"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
-      <button type="button" data-dir="1" aria-label="Más reseñas"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
-  </div>
+  <a class="more-g" href="https://www.google.com/maps/search/?api=1&query=Mestre+Ciclista+C%2F+Maspons+12" target="_blank" rel="noopener">Ver todas las reseñas en Google</a>
 </section>
 
 <!-- ======================= CON QUIÉN TRABAJAMOS ======================= -->
@@ -412,20 +394,9 @@ const GALERIA = [
   });
 })();
 
-/* -------- Reseñas: "Leer más" solo si el texto está cortado; flechas del carrusel -------- */
-(function(){
-  const track=document.getElementById('revs'); if(!track) return;
-  track.querySelectorAll('.rev').forEach(c=>{
-    const p=c.querySelector('p'),b=c.querySelector('.more');
-    if(p.scrollHeight>p.clientHeight+2){b.hidden=false;b.setAttribute('aria-expanded','false');}
-    b.addEventListener('click',()=>{const o=c.classList.toggle('open');b.textContent=o?'Leer menos':'Leer más';b.setAttribute('aria-expanded',o)});
-  });
-  const [prev,next]=document.querySelectorAll('#resenas .arrows button');
-  const step=()=>{const c=track.querySelector('.rev');return c.offsetWidth+14};
-  const state=()=>{prev.disabled=track.scrollLeft<4;next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-4};
-  [prev,next].forEach(b=>b.addEventListener('click',()=>track.scrollBy({left:step()*+b.dataset.dir,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})));
-  track.addEventListener('scroll',state,{passive:true});addEventListener('resize',state);state();
-})();
+/* -------- Reseñas: las tarjetas entran al llegar a la sección -------- */
+(function(){const b=document.getElementById('board');if(!b)return;
+  const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){b.classList.add('in');o.disconnect()}}),{threshold:.2});o.observe(b);})();
 
 /* -------- Texto que aparece palabra a palabra -------- */
 document.querySelectorAll('.words').forEach(el=>{
